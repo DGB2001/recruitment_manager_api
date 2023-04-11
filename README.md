@@ -40,3 +40,6 @@ composer test
 ```
 
 That's it! Now go build something cool.
+
+# run web server by command:
+`php -S localhost:8080 -t public`
