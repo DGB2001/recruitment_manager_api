@@ -3,9 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\User;
 
-class CreateUsersTable extends Migration
+class CreateMasterLevelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +13,9 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('master_levels', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->tinyInteger('role')->comment('0:admin; 1:candidate; 2:employer');
-            $table->boolean('status')->default(User::STATUS_ACTIVE)->comment('0:deactivated; 1:active');
+            $table->string('name')->unique();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +28,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('master_levels');
     }
 }
