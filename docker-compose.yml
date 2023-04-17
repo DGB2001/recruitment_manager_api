@@ -59,15 +59,15 @@ services:
     ports:
       - "8010:80"
 
-  s3:
-    image: minio/minio
-    container_name: recruitment-manager-api-s3
-    ports:
-      - 9010:9010
-      - 9020:9020
-    environment:
-      MINIO_ROOT_USER: minio
-      MINIO_ROOT_PASSWORD: minio123
-    volumes:
-      - ./docker/minio:/data
-    command: server /data --address :9010 --console-address :9020
+#   s3:
+#     image: minio/minio
+#     container_name: recruitment-manager-api-s3
+#     ports:
+#       - 9010:9010
+#       - 9020:9020
+#     environment:
+#       MINIO_ROOT_USER: minio
+#       MINIO_ROOT_PASSWORD: minio123
+#     volumes:
+#       - ./docker/minio:/data
+#     command: server /data --address :9010 --console-address :9020
