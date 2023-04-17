@@ -1,0 +1,55 @@
+put:
+  summary: "Update exist user"
+  description: |
+    # Overview
+    ## Request Header
+    | Key | Value |
+    | :---- | :---- |
+    | Content-Type | application/json |
+    ## Request Body
+    | Name | Type | Size | Required | Description |
+    | :---- | :---- | :---- | :---- | :---- |
+    | name | string | 255 | Required ||
+    | email | string | 255 | Required ||
+    | password | string | 20 | Required ||
+  tags: ["user"]
+  deprecated: false
+  parameters:
+    - $ref: "openapi.yaml#/components/parameters/Id"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - grantType
+          properties:
+            name: { $ref: "openapi.yaml#/components/schemas/Name" }
+            email: { $ref: "openapi.yaml#/components/schemas/Email" }
+            password: { $ref: "openapi.yaml#/components/schemas/Password" }
+  responses:
+    "201":
+      $ref: "openapi.yaml#/components/responses/201"
+    "default":
+      $ref: "openapi.yaml#/components/responses/default"
+  security: []
+
+delete:
+  summary: "Delete exist user"
+  description: |
+    # Overview
+    ## Request Header
+    | Key | Value |
+    | :---- | :---- |
+    | Content-Type | application/json |
+  tags: ["user"]
+  deprecated: false
+  parameters:
+    - $ref: "openapi.yaml#/components/parameters/Id"
+  responses:
+    "204":
+      $ref: "openapi.yaml#/components/responses/204"
+    "default":
+      $ref: "openapi.yaml#/components/responses/default"
+  security: []

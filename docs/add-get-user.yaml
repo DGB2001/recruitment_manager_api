@@ -1,0 +1,58 @@
+get:
+  summary: "Get list user"
+  tags: ["user"]
+  deprecated: false
+  responses:
+    "200":
+      description: "OK"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id: { $ref: "openapi.yaml#/components/schemas/Id" }
+              name: { $ref: "openapi.yaml#/components/schemas/Name" }
+              email: { $ref: "openapi.yaml#/components/schemas/Email" }
+    "default":
+      $ref: "openapi.yaml#/components/responses/default"
+  security: []
+
+post:
+  summary: "Add new user"
+  description: |
+    # Overview
+    ## Request Header
+    | Key | Value |
+    | :---- | :---- |
+    | Content-Type | application/json |
+    ## Request Body
+    | Name | Type | Size | Required | Description |
+    | :---- | :---- | :---- | :---- | :---- |
+    | name | string | 255 | Required ||
+    | email | string | 255 | Required ||
+    | password | string | 20 | Required ||
+    | password_confirmation | string | 20 | Required | Confirm password ||
+  tags: ["user"]
+  deprecated: false
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - grantType
+          properties:
+            name: { $ref: "openapi.yaml#/components/schemas/Name" }
+            email: { $ref: "openapi.yaml#/components/schemas/Email" }
+            password: { $ref: "openapi.yaml#/components/schemas/Password" }
+            password_confirmation:
+              type: string
+              maxLength: 20
+              example: "password"
+  responses:
+    "201":
+      $ref: "openapi.yaml#/components/responses/201"
+    "default":
+      $ref: "openapi.yaml#/components/responses/default"
+  security: []

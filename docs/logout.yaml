@@ -1,0 +1,16 @@
+delete:
+  summary: "Logout"
+  # description: |
+  #   # Overview
+  #   ## Request Header
+  #   | Key | Value |
+  #   | :---- | :---- |
+  #   | AuthorizationAPI | Bearer [token] |
+  #   | Content-Type | application/json |
+  tags: ["auth"]
+  deprecated: false
+  responses:
+    "204":
+      $ref: "openapi.yaml#/components/responses/204"
+    "default":
+      $ref: "openapi.yaml#/components/responses/default"

@@ -1,0 +1,54 @@
+
+post:
+  summary: "Login"
+  description: |
+    # Overview
+    ## Request Header
+    | Key | Value |
+    | :---- | :---- |
+    | Content-Type | application/json |
+    ## Request Body (In case of login)
+    | Name | Type | Size | Required | Description |
+    | :---- | :---- | :---- | :---- | :---- |
+    | email | string | 256 | Required ||
+    | password | string | 20 | Required ||
+    | grantType | string | 255 | Required | Fix "password" |
+    ## Request Body (In case of refresh token)
+    | Name | Type | Size | Required | Description |
+    | :---- | :---- | :---- | :---- | :---- |
+    | refreshToken | string | 255 | Required ||
+    | grantType | string | 255 | Required | Fix "refreshToken" |
+
+  tags: ["auth"]
+  deprecated: false
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - grantType
+          properties:
+            email: { $ref: "openapi.yaml#/components/schemas/Email" }
+            password: { $ref: "openapi.yaml#/components/schemas/Password" }
+            refreshToken: { $ref: "openapi.yaml#/components/schemas/Token" }
+            grantType: { $ref: "openapi.yaml#/components/schemas/GrantType" }
+  responses:
+    "200":
+      description: "OK"
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - accessToken
+              - refreshToken
+              - loginId
+            properties:
+              accessToken: { $ref: "openapi.yaml#/components/schemas/Token" }
+              refreshToken: { $ref: "openapi.yaml#/components/schemas/Token" }
+              loginId: { $ref: "openapi.yaml#/components/schemas/Id" }
+    "default":
+      $ref: "openapi.yaml#/components/responses/default"
+  security: []

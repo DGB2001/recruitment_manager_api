@@ -1,0 +1,117 @@
+openapi: "3.0.3"
+
+info:
+  title: "Recruitment Manager API"
+  description: |
+    | Environment | URL |
+    | :---- | :---- |
+    | Local | http://localhost:8010/api/v1 |
+  version: "1.0.0"
+
+servers:
+  - url: "http://localhost:{port}/api/{version}"
+    description: "Local environment"
+    variables:
+      port:
+        description: "API port"
+        enum: ["8010"]
+        default: "8010"
+      version:
+        description: "API version"
+        enum: ["v1"]
+        default: "v1"
+
+tags:
+  - name: auth
+  - name: health-check
+  - name: user
+
+paths:
+  # auth
+  "/login":
+    $ref: "login.yaml"
+  "/logout":
+    $ref: "logout.yaml"
+
+  # health-check
+  "/health-check":
+    $ref: "health-check.yaml"
+
+  # user
+  "/user":
+    $ref: "add-get-user.yaml"
+  "/user/{id}":
+    $ref: "update-delete-user.yaml"
+
+security:
+    - bearer_auth: []
+
+components:
+  schemas:
+    Page:
+      $ref: "schemas.yaml#/Page"
+
+    Limit:
+      $ref: "schemas.yaml#/Limit"
+
+    TotalPage:
+      $ref: "schemas.yaml#/TotalPage"
+
+    TotalCount:
+      $ref: "schemas.yaml#/TotalCount"
+
+    Token:
+      $ref: "schemas.yaml#/Token"
+
+    GrantType:
+      $ref: "schemas.yaml#/GrantType"
+
+    Name:
+      $ref: "schemas.yaml#/Name"
+
+    Email:
+      $ref: "schemas.yaml#/Email"
+
+    Password:
+      $ref: "schemas.yaml#/Password"
+
+    Id:
+      $ref: "schemas.yaml#/Id"
+
+    Boolean:
+      $ref: "schemas.yaml#/Boolean"
+
+    Datetime:
+      $ref: "schemas.yaml#/Datetime"
+
+  parameters:
+    Id:
+      $ref: "parameters.yaml#/Id"
+
+    Page:
+      $ref: "parameters.yaml#/Page"
+
+    Limit:
+      $ref: "parameters.yaml#/Limit"
+
+    UsePage:
+      $ref: "parameters.yaml#/UsePage"
+
+  responses:
+    200:
+      $ref: "responses.yaml#/200"
+    201:
+      $ref: "responses.yaml#/201"
+    204:
+      $ref: "responses.yaml#/204"
+    400:
+      $ref: "responses.yaml#/400"
+    401:
+      $ref: "responses.yaml#/401"
+    404:
+      $ref: "responses.yaml#/404"
+    default:
+      $ref: "responses.yaml#/default"
+  securitySchemes:
+    bearer_auth:
+      $ref: "securitySchemes.yaml#/bearer_auth"
