@@ -5,6 +5,7 @@ use App\Http\Controllers\API\V1;
 use App\Http\Controllers\API\V1\AuthController;
 use App\Http\Controllers\API\V1\UserController;
 use App\Http\Controllers\API\V1\RecruitmentNewsController;
+use App\Http\Controllers\API\V1\ApplicationController;
 use Illuminate\Support\Facades\Route;
 
 /*
