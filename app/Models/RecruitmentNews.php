@@ -22,6 +22,10 @@ class RecruitmentNews extends Model
         'expired_at',
     ];
 
+    protected $casts = [
+        'expired_at' => 'datetime:d/m/Y',
+    ];
+
     /**
      * The attributes that should be hidden for serialization.
      *

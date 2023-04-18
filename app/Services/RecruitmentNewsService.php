@@ -6,6 +6,7 @@ use App\Models\RecruitmentNews;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Carbon\Carbon;
 
 class RecruitmentNewsService implements RecruitmentNewsServiceInterface
 {
@@ -28,7 +29,7 @@ class RecruitmentNewsService implements RecruitmentNewsServiceInterface
                 'description' => $recruitmentNews->description,
                 'salary' => $recruitmentNews->salary,
                 'quantity' => $recruitmentNews->quantity,
-                'expired_at' => $recruitmentNews->expired_at,
+                'expired_at' => Carbon::parse($recruitmentNews->expired_at)->format('d/m/Y'),
                 'employer' => $recruitmentNews->employer,
                 'master_technical' => $recruitmentNews->masterTechnical,
                 'master_level' => $recruitmentNews->masterLevel,
