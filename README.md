@@ -10,6 +10,8 @@
 - `composer install`
 ### DB migration
 - `php artisan migrate`
+### Generate fake data
+- `php artisan db:seed`
 ### Run application
 - http://localhost:8010
 ### Doc API
