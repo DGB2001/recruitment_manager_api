@@ -24,10 +24,8 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required_if:grantType,' . config('const.grant_type.password') . '|max:256|email',
-            'password' => 'required_if:grantType,' . config('const.grant_type.password') . '|max:20',
-            'grantType' => 'required|max:255|in:' . implode(',', config('const.grant_type')),
-            'refreshToken' => 'required_if:grantType,' . config('const.grant_type.refresh_token') . '|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'required|max:255',
         ];
     }
 
@@ -39,9 +37,8 @@ class LoginRequest extends FormRequest
     public function attributes()
     {
         return [
-            'email' => 'メールアドレス',
-            'password' => 'パスワード',
-            'refreshToken' => 'リフレッシュトークン',
+            'email' => 'Email',
+            'password' => 'Mật khẩu',
         ];
     }
 
@@ -53,8 +50,7 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'required_if' => ':attributeは、必ず指定してください。',
-            'email.regex' => trans('validation.email'),
+            'required' => 'Vui lòng nhập :attribute',
         ];
     }
 }

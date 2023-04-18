@@ -21,7 +21,7 @@ class RecruitmentNewsFactory extends Factory
             'description' => $this->faker->paragraphs($nb = 3, $asText = true),
             'salary' => $this->faker->numberBetween($min = 1000000, $max = 50000000),
             'quantity' => $this->faker->randomDigitNotNull,
-            'expired_at' => $this->faker->dateTimeThisMonth($max = 'now'),
+            'expired_at' => $this->faker->dateTimeBetween('-1 week', '+1 week'),
         ];
     }
 }
