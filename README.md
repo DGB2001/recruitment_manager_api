@@ -12,6 +12,8 @@
 - `php artisan migrate`
 ### Generate fake data
 - `php artisan db:seed`
+### Base URL
+- http://localhost:8010/api/v1
 ### Run application
 - http://localhost:8010
 ### Doc API
