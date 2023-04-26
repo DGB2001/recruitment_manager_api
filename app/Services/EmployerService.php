@@ -41,8 +41,8 @@ class EmployerService implements EmployerServiceInterface
      */
     public function getEmployerDetail(int $employerId)
     {
-        $candidate = Employer::with(['user'])->findOrFail($employerId);
-        return [Response::HTTP_OK, $candidate];
+        $employer = Employer::with(['user'])->findOrFail($employerId);
+        return [Response::HTTP_OK, $employer];
     }
 
     /**
@@ -78,7 +78,22 @@ class EmployerService implements EmployerServiceInterface
      */
     public function getEmployerList(array $params)
     {
-        $candidate = Employer::get();
-        return [Response::HTTP_OK, $candidate];
+        $employer = Employer::get();
+        return [Response::HTTP_OK, $employer];
+    }
+
+    /**
+     * getEmployerDetail
+     *
+     * @param int $employerId
+     * @return array
+     */
+    public function deleteEmployer(int $employerId)
+    {
+        $employer = Employer::where('id', $employerId)->firstOrFail();
+        $employer->delete();
+        $employer->user->delete();
+
+        return [Response::HTTP_OK, ['status' => Response::HTTP_NO_CONTENT]];
     }
 }

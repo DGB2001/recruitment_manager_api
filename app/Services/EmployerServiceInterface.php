@@ -11,4 +11,6 @@ interface EmployerServiceInterface
     public function updateEmployer(array $params);
 
     public function getEmployerList(array $params);
+
+    public function deleteEmployer(int $employerId);
 }

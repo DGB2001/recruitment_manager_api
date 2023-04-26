@@ -75,4 +75,17 @@ class EmployerController extends BaseController
 
         return $this->response($data, $statusCode);
     }
+
+    /**
+     * getEmployerDetail
+     *
+     * @param int $employerId
+     * @return json
+     */
+    public function deleteEmployer(int $employerId)
+    {
+        list($statusCode, $data) = $this->employerService->deleteEmployer($employerId);
+
+        return $this->response($data, $statusCode);
+    }
 }

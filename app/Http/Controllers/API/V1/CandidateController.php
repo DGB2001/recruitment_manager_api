@@ -74,4 +74,17 @@ class CandidateController extends BaseController
 
         return $this->response($data, $statusCode);
     }
+
+    /**
+     * deleteCandidate
+     *
+     * @param int $candidateId
+     * @return json
+     */
+    public function deleteCandidate(int $candidateId)
+    {
+        list($statusCode, $data) = $this->candidateService->deleteCandidate($candidateId);
+
+        return $this->response($data, $statusCode);
+    }
 }

@@ -84,4 +84,19 @@ class CandidateService implements CandidateServiceInterface
 
         return [Response::HTTP_OK, $application];
     }
+
+    /**
+     * deleteCandidate
+     *
+     * @param int $candidateId
+     * @return array
+     */
+    public function deleteCandidate(int $candidateId)
+    {
+        $candidate = Candidate::findOrFail($candidateId);
+        $candidate->delete();
+        $candidate->user->delete();
+
+        return [Response::HTTP_OK, ['status' => Response::HTTP_NO_CONTENT]];
+    }
 }

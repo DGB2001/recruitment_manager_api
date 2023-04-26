@@ -53,6 +53,7 @@ Route::controller(CandidateController::class)->group(function () {
     Route::get('/candidates/{id}', 'getCandidateDetail')->name('get-candidate-detail');
     Route::put('/candidates/{id}', 'updateCandidate')->name('update-candidate');
     Route::get('/candidates/{id}/applications', 'getCandidateApplicationList')->name('get-candidate-application-list');
+    Route::delete('/candidates/{id}', 'deleteCandidate')->name('delete-candidate');
 });
 
 Route::controller(EmployerController::class)->group(function () {
@@ -60,4 +61,5 @@ Route::controller(EmployerController::class)->group(function () {
     Route::get('/employers/{id}', 'getEmployerDetail')->name('get-employer-detail');
     Route::put('/employers/{id}', 'updateEmployer')->name('update-employer');
     Route::get('/employers', 'getEmployerList')->name('get-employer-list');
+    Route::delete('/employers/{id}', 'deleteEmployer')->name('delete-employer');
 });
