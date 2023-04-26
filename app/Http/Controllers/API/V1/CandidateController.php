@@ -61,4 +61,17 @@ class CandidateController extends BaseController
 
         return $this->response($data, $statusCode);
     }
+
+    /**
+     * getCandidateApplicationList
+     *
+     * @param int $candidateId
+     * @return json
+     */
+    public function getCandidateApplicationList(int $candidateId)
+    {
+        list($statusCode, $data) = $this->candidateService->getCandidateApplicationList($candidateId);
+
+        return $this->response($data, $statusCode);
+    }
 }

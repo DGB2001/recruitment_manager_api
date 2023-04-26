@@ -52,6 +52,7 @@ Route::controller(CandidateController::class)->group(function () {
     Route::post('/candidates', 'createCandidate')->name('create-candidate');
     Route::get('/candidates/{id}', 'getCandidateDetail')->name('get-candidate-detail');
     Route::put('/candidates/{id}', 'updateCandidate')->name('update-candidate');
+    Route::get('/candidates/{id}/applications', 'getCandidateApplicationList')->name('get-candidate-application-list');
 });
 
 Route::controller(EmployerController::class)->group(function () {

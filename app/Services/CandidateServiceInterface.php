@@ -9,4 +9,6 @@ interface CandidateServiceInterface
     public function getCandidateDetail(int $candidateId);
 
     public function updateCandidate(array $params);
+
+    public function getCandidateApplicationList(int $candidateId);
 }

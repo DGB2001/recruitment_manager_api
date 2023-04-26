@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Application;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
@@ -68,5 +69,19 @@ class CandidateService implements CandidateServiceInterface
         }
 
         return [Response::HTTP_CREATED, ['status' => Response::HTTP_NO_CONTENT]];
+    }
+
+    /**
+     * getCandidateApplicationList
+     *
+     * @param int $candidateId
+     * @return array
+     */
+    public function getCandidateApplicationList(int $candidateId)
+    {
+        $application = Application::with(['masterTechnical', 'masterLevel'])
+            ->where('candidate_id', $candidateId)->orderByDesc('created_at')->get();
+
+        return [Response::HTTP_OK, $application];
     }
 }
