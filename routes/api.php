@@ -37,6 +37,7 @@ Route::controller(RecruitmentNewsController::class)->group(function () {
     Route::get('/recruitment-news', 'getListRecruitmentNews')->name('get-recruitment-news-list');
     Route::get('/recruitment-news/{id}', 'getRecruitmentNewsDetail')->name('get-recruitment-news-detail');
     Route::post('/recruitment-news', 'createRecruitmentNews')->name('create-recruitment-news');
+    Route::put('/recruitment-news/{id}', 'updateRecruitmentNews')->name('update-recruitment-news');
 });
 
 Route::controller(ApplicationController::class)->group(function () {

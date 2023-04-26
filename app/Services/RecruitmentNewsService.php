@@ -23,7 +23,7 @@ class RecruitmentNewsService implements RecruitmentNewsServiceInterface
             'employer',
             'masterTechnical',
             'masterLevel',
-        ])->get();
+        ])->orderByDesc('created_at')->get();
         return [Response::HTTP_OK, $recruitmentNewsList->map(function ($recruitmentNews) {
             return [
                 'id' => $recruitmentNews->id,
@@ -74,5 +74,29 @@ class RecruitmentNewsService implements RecruitmentNewsServiceInterface
         }
 
         return [Response::HTTP_CREATED, ['status' => Response::HTTP_CREATED]];
+    }
+
+    /**
+     * updateRecruitmentNews
+     *
+     * @param array $params
+     * @return array
+     */
+    public function updateRecruitmentNews(array $params)
+    {
+        $recruitmentNews = RecruitmentNews::where('employer_id', $params['employer_id'])
+            ->findOrFail($params['id']);
+
+        DB::beginTransaction();
+        try {
+            $recruitmentNews->update($params);
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Log::error($th);
+            return [Response::HTTP_INTERNAL_SERVER_ERROR, ['message' => config('const.message.internal_server_error')]];
+        }
+
+        return [Response::HTTP_CREATED, ['status' => Response::HTTP_NO_CONTENT]];
     }
 }

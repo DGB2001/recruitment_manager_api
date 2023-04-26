@@ -9,4 +9,6 @@ interface RecruitmentNewsServiceInterface
     public function getRecruitmentNewsDetail(int $recruitmentNewsId);
 
     public function createRecruitmentNews(array $params);
+
+    public function updateRecruitmentNews(array $params);
 }
