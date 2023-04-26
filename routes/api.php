@@ -6,6 +6,8 @@ use App\Http\Controllers\API\V1\AuthController;
 use App\Http\Controllers\API\V1\UserController;
 use App\Http\Controllers\API\V1\RecruitmentNewsController;
 use App\Http\Controllers\API\V1\ApplicationController;
+use App\Http\Controllers\API\V1\CandidateController;
+use App\Http\Controllers\API\V1\EmployerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,5 +39,13 @@ Route::controller(RecruitmentNewsController::class)->group(function () {
 });
 
 Route::controller(ApplicationController::class)->group(function () {
-    Route::post('/application', 'createApplication')->name('create-application');
+    Route::post('/applications', 'createApplication')->name('create-application');
+});
+
+Route::controller(CandidateController::class)->group(function () {
+    Route::post('/candidates', 'createCandidate')->name('create-candidate');
+});
+
+Route::controller(EmployerController::class)->group(function () {
+    Route::post('/employers', 'createEmployer')->name('create-employer');
 });

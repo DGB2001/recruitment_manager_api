@@ -27,6 +27,6 @@ class ApplicationService implements ApplicationServiceInterface
             \Log::error($th);
             return [Response::HTTP_INTERNAL_SERVER_ERROR, ['message' => [trans('auth.failed')]]];
         }
-        return [Response::HTTP_CREATED, []];
+        return [Response::HTTP_CREATED, ['status' => Response::HTTP_CREATED]];
     }
 }
