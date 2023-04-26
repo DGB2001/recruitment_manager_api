@@ -7,7 +7,7 @@
 ### Generate fake data
 - `php artisan db:seed`
 ### Run server
-- `php artisan serve`
+- `php artisan serve --host={your IPV4} --port=8000`
 ### Base URL
 - http://localhost:8000/api/v1
 ### Run application
