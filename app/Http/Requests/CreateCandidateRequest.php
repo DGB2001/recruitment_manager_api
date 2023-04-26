@@ -28,7 +28,7 @@ class CreateCandidateRequest extends FormRequest
         return [
             'email' => 'required|email|unique:users,email|max:255',
             'password' => 'required|string|max:255',
-            'role' => 'required|integer|in:' . implode(',', array_keys(User::$roles)),
+            'role' => 'required|integer|in:' . User::ROLE_CANDIDATE,
             'name' => 'required|string|max:255',
             'gender' => 'required|integer|in:' . implode(',', array_keys(Candidate::$genders)),
             'phone_number' => 'required|digits:10|unique:candidates,phone_number',

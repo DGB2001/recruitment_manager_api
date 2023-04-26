@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Employer;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -27,7 +28,7 @@ class CreateEmployerRequest extends FormRequest
         return [
             'email' => 'required|email|unique:users,email|max:255',
             'password' => 'required|string|max:255',
-            'role' => 'required|integer|in:' . implode(',', array_keys(User::$roles)),
+            'role' => 'required|integer|in:' . User::ROLE_EMPLOYER,
             'company_name' => 'required|string|max:255',
             'phone_number' => 'required|digits:10|unique:employers,phone_number',
             'address' => 'required|string|max:255',
