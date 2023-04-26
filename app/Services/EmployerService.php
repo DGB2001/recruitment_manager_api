@@ -69,4 +69,16 @@ class EmployerService implements EmployerServiceInterface
 
         return [Response::HTTP_CREATED, ['status' => Response::HTTP_NO_CONTENT]];
     }
+
+    /**
+     * getEmployerList
+     *
+     * @param array $params
+     * @return array
+     */
+    public function getEmployerList(array $params)
+    {
+        $candidate = Employer::get();
+        return [Response::HTTP_OK, $candidate];
+    }
 }

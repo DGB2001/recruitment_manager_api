@@ -52,4 +52,9 @@ class RecruitmentNews extends Model
     {
         return $this->belongsTo(MasterLevel::class);
     }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
 }

@@ -9,4 +9,6 @@ interface EmployerServiceInterface
     public function getEmployerDetail(int $employerId);
 
     public function updateEmployer(array $params);
+
+    public function getEmployerList(array $params);
 }

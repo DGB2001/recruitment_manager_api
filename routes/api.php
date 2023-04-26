@@ -52,4 +52,5 @@ Route::controller(EmployerController::class)->group(function () {
     Route::post('/employers', 'createEmployer')->name('create-employer');
     Route::get('/employers/{id}', 'getEmployerDetail')->name('get-employer-detail');
     Route::put('/employers/{id}', 'updateEmployer')->name('update-employer');
+    Route::get('/employers', 'getEmployerList')->name('get-employer-list');
 });

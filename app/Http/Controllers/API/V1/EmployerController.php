@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Services\EmployerServiceInterface;
 use App\Http\Requests\CreateEmployerRequest;
+use App\Http\Requests\GetEmployerListRequest;
 use App\Http\Requests\UpdateEmployerRequest;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,7 @@ class EmployerController extends BaseController
         return $this->response($data, $statusCode);
     }
 
-     /**
+    /**
      * updateEmployer
      *
      * @param UpdateEmployerRequest $request
@@ -58,6 +59,19 @@ class EmployerController extends BaseController
         $params = $request->all();
         $params['id'] = $request->id;
         list($statusCode, $data) = $this->employerService->updateEmployer($params);
+
+        return $this->response($data, $statusCode);
+    }
+
+    /**
+     * getEmployerList
+     *
+     * @param GetEmployerListRequest $request
+     * @return json
+     */
+    public function getEmployerList(GetEmployerListRequest $request)
+    {
+        list($statusCode, $data) = $this->employerService->getEmployerList($request->all());
 
         return $this->response($data, $statusCode);
     }
