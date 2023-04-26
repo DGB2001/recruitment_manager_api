@@ -38,6 +38,8 @@ Route::controller(RecruitmentNewsController::class)->group(function () {
     Route::get('/recruitment-news/{id}', 'getRecruitmentNewsDetail')->name('get-recruitment-news-detail');
     Route::post('/recruitment-news', 'createRecruitmentNews')->name('create-recruitment-news');
     Route::put('/recruitment-news/{id}', 'updateRecruitmentNews')->name('update-recruitment-news');
+    Route::patch('/recruitment-news/{recruitmentId}/applications/{applicationId}', 'updateApplicationResult')
+        ->name('update-application-result');
 });
 
 Route::controller(ApplicationController::class)->group(function () {

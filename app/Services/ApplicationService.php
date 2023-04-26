@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Application;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Models\RecruitmentNews;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,7 @@ class ApplicationService implements ApplicationServiceInterface
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollback();
-            \Log::error($th);
+            Log::error($th);
             return [Response::HTTP_INTERNAL_SERVER_ERROR, ['message' => [trans('auth.failed')]]];
         }
         return [Response::HTTP_CREATED, ['status' => Response::HTTP_CREATED]];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Requests\CreateRecruitmentNewsRequest;
 use App\Http\Requests\GetRecruitmentNewsListRequest;
+use App\Http\Requests\UpdateApplicationResultRequest;
 use App\Http\Requests\UpdateRecruitmentNewsRequest;
 use App\Services\RecruitmentNewsServiceInterface;
 use Illuminate\Http\Request;
@@ -73,6 +74,25 @@ class RecruitmentNewsController extends BaseController
         $params = $request->all();
         $params['id'] = $recruitmentNewsId;
         list($statusCode, $data) = $this->recruitmentNewsService->updateRecruitmentNews($params);
+
+        return $this->response($data, $statusCode);
+    }
+
+    /**
+     * updateApplicationResult
+     *
+     * @param UpdateApplicationResultRequest $request
+     * @param int $recruitmentNewsId
+     * @param int $applicationId
+     * @return json
+     */
+    public function updateApplicationResult(UpdateApplicationResultRequest $request, int $recruitmentNewsId, int $applicationId)
+    {
+        list($statusCode, $data) = $this->recruitmentNewsService->updateApplicationResult(
+            $recruitmentNewsId,
+            $applicationId,
+            $request->result
+        );
 
         return $this->response($data, $statusCode);
     }

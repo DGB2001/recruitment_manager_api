@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Application;
 use App\Models\RecruitmentNews;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -90,6 +91,34 @@ class RecruitmentNewsService implements RecruitmentNewsServiceInterface
         DB::beginTransaction();
         try {
             $recruitmentNews->update($params);
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Log::error($th);
+            return [Response::HTTP_INTERNAL_SERVER_ERROR, ['message' => config('const.message.internal_server_error')]];
+        }
+
+        return [Response::HTTP_CREATED, ['status' => Response::HTTP_NO_CONTENT]];
+    }
+
+    /**
+     * updateApplicationResult
+     *
+     * @param int $recruitmentNewsId
+     * @param int $applicationId
+     * @param int $result
+     * @return array
+     */
+    public function updateApplicationResult(int $recruitmentNewsId, int $applicationId, int $result)
+    {
+        $application = Application::where('recruitment_news_id', $recruitmentNewsId)
+            ->where('id', $applicationId)->whereNull('result')->firstOrFail();
+
+        DB::beginTransaction();
+        try {
+            $application->update([
+                'result' => $result
+            ]);
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollback();
