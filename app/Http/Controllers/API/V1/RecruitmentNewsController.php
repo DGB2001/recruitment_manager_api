@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use App\Http\Requests\CreateRecruitmentNewsRequest;
+use App\Http\Requests\GetRecruitmentNewsListRequest;
 use App\Services\RecruitmentNewsServiceInterface;
 use Illuminate\Http\Request;
 
@@ -22,12 +24,12 @@ class RecruitmentNewsController extends BaseController
     /**
      * getListRecruitmentNews
      *
-     * @param Request $request
+     * @param GetRecruitmentNewsListRequest $request
      * @return json
      */
-    public function getListRecruitmentNews(Request $request)
+    public function getListRecruitmentNews(GetRecruitmentNewsListRequest $request)
     {
-        list($statusCode, $data) = $this->recruitmentNewsService->getListRecruitmentNews($request);
+        list($statusCode, $data) = $this->recruitmentNewsService->getListRecruitmentNews($request->all());
 
         return $this->response($data, $statusCode);
     }
@@ -41,6 +43,19 @@ class RecruitmentNewsController extends BaseController
     public function getRecruitmentNewsDetail(int $recruitmentNewsId)
     {
         list($statusCode, $data) = $this->recruitmentNewsService->getRecruitmentNewsDetail($recruitmentNewsId);
+
+        return $this->response($data, $statusCode);
+    }
+
+    /**
+     * createRecruitmentNews
+     *
+     * @param CreateRecruitmentNewsRequest $request
+     * @return json
+     */
+    public function createRecruitmentNews(CreateRecruitmentNewsRequest $request)
+    {
+        list($statusCode, $data) = $this->recruitmentNewsService->createRecruitmentNews($request->all());
 
         return $this->response($data, $statusCode);
     }

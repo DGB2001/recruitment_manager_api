@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class RecruitmentNewsService implements RecruitmentNewsServiceInterface
 {
@@ -15,7 +17,7 @@ class RecruitmentNewsService implements RecruitmentNewsServiceInterface
      *
      * @return array
      */
-    public function getListRecruitmentNews($params)
+    public function getListRecruitmentNews(array $params)
     {
         $recruitmentNewsList = RecruitmentNews::with([
             'employer',
@@ -50,5 +52,27 @@ class RecruitmentNewsService implements RecruitmentNewsServiceInterface
             'masterLevel',
         ])->findOrFail($recruitmentNewsId);
         return [Response::HTTP_OK, $recruitmentNews];
+    }
+
+    /**
+     * createRecruitmentNews
+     *
+     * @param $params
+     * @return array
+     */
+    public function createRecruitmentNews(array $params)
+    {
+        $params['expired-at'] = date("Y-m-d", strtotime($params['expired_at']));
+        DB::beginTransaction();
+        try {
+            RecruitmentNews::create($params);
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Log::error($th);
+            return [Response::HTTP_INTERNAL_SERVER_ERROR, ['message' => config('const.message.internal_server_error')]];
+        }
+
+        return [Response::HTTP_CREATED, ['status' => Response::HTTP_CREATED]];
     }
 }

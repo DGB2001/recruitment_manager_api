@@ -4,7 +4,9 @@ namespace App\Services;
 
 interface RecruitmentNewsServiceInterface
 {
-    public function getListRecruitmentNews($params);
+    public function getListRecruitmentNews(array $params);
 
-    public function getRecruitmentNewsDetail($recruitmentNewsId);
+    public function getRecruitmentNewsDetail(int $recruitmentNewsId);
+
+    public function createRecruitmentNews(array $params);
 }
