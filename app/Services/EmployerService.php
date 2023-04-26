@@ -44,4 +44,29 @@ class EmployerService implements EmployerServiceInterface
         $candidate = Employer::with(['user'])->findOrFail($employerId);
         return [Response::HTTP_OK, $candidate];
     }
+
+    /**
+     * updateEmployer
+     *
+     * @param array $params
+     * @return array
+     */
+    public function updateEmployer(array $params)
+    {
+        $employer = Employer::findOrFail($params['id']);
+        $user = $employer->user;
+
+        DB::beginTransaction();
+        try {
+            $user->update(['email' => $params['email']]);
+            $employer->update($params);
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Log::error($th);
+            return [Response::HTTP_INTERNAL_SERVER_ERROR, ['message' => config('const.message.internal_server_error')]];
+        }
+
+        return [Response::HTTP_CREATED, ['status' => Response::HTTP_NO_CONTENT]];
+    }
 }

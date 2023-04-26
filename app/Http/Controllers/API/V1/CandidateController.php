@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Services\CandidateServiceInterface;
 use App\Http\Requests\CreateCandidateRequest;
+use App\Http\Requests\UpdateCandidateRequest;
 use Illuminate\Http\Request;
 
 class CandidateController extends BaseController
@@ -42,6 +43,21 @@ class CandidateController extends BaseController
     public function getCandidateDetail(int $candidateId)
     {
         list($statusCode, $data) = $this->candidateService->getCandidateDetail($candidateId);
+
+        return $this->response($data, $statusCode);
+    }
+
+    /**
+     * updateCandidate
+     *
+     * @param UpdateCandidateRequest $request
+     * @return json
+     */
+    public function updateCandidate(UpdateCandidateRequest $request)
+    {
+        $params = $request->all();
+        $params['id'] = $request->id;
+        list($statusCode, $data) = $this->candidateService->updateCandidate($params);
 
         return $this->response($data, $statusCode);
     }

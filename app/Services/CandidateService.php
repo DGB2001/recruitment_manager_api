@@ -44,4 +44,29 @@ class CandidateService implements CandidateServiceInterface
         $candidate = Candidate::with(['user'])->findOrFail($candidateId);
         return [Response::HTTP_OK, $candidate];
     }
+
+    /**
+     * updateCandidate
+     *
+     * @param array $params
+     * @return array
+     */
+    public function updateCandidate(array $params)
+    {
+        $candidate = Candidate::findOrFail($params['id']);
+        $user = $candidate->user;
+
+        DB::beginTransaction();
+        try {
+            $user->update(['email' => $params['email']]);
+            $candidate->update($params);
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Log::error($th);
+            return [Response::HTTP_INTERNAL_SERVER_ERROR, ['message' => config('const.message.internal_server_error')]];
+        }
+
+        return [Response::HTTP_CREATED, ['status' => Response::HTTP_NO_CONTENT]];
+    }
 }
