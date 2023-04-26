@@ -128,4 +128,18 @@ class RecruitmentNewsService implements RecruitmentNewsServiceInterface
 
         return [Response::HTTP_CREATED, ['status' => Response::HTTP_NO_CONTENT]];
     }
+
+    /**
+     * getRecruitmentApplicationList
+     *
+     * @param int $recruitmentNewsId
+     * @return array
+     */
+    public function getRecruitmentApplicationList(int $recruitmentNewsId)
+    {
+        $application = Application::with(['candidate', 'masterTechnical', 'masterLevel'])
+            ->where('recruitment_news_id', $recruitmentNewsId)->get()->toArray();
+
+        return [Response::HTTP_OK, $application];
+    }
 }

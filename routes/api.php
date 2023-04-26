@@ -40,6 +40,8 @@ Route::controller(RecruitmentNewsController::class)->group(function () {
     Route::put('/recruitment-news/{id}', 'updateRecruitmentNews')->name('update-recruitment-news');
     Route::patch('/recruitment-news/{recruitmentId}/applications/{applicationId}', 'updateApplicationResult')
         ->name('update-application-result');
+    Route::get('/recruitment-news/{id}/applications', 'getRecruitmentApplicationList')
+        ->name('get-application-list-of-recruitment-news');
 });
 
 Route::controller(ApplicationController::class)->group(function () {

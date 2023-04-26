@@ -96,4 +96,17 @@ class RecruitmentNewsController extends BaseController
 
         return $this->response($data, $statusCode);
     }
+
+    /**
+     * getRecruitmentApplicationList
+     *
+     * @param int $recruitmentNewsId
+     * @return json
+     */
+    public function getRecruitmentApplicationList(int $recruitmentNewsId)
+    {
+        list($statusCode, $data) = $this->recruitmentNewsService->getRecruitmentApplicationList($recruitmentNewsId);
+
+        return $this->response($data, $statusCode);
+    }
 }

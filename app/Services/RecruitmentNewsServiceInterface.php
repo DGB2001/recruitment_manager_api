@@ -13,4 +13,6 @@ interface RecruitmentNewsServiceInterface
     public function updateRecruitmentNews(array $params);
 
     public function updateApplicationResult(int $recruitmentNewsId, int $applicationId, int $result);
+
+    public function getRecruitmentApplicationList(int $recruitmentNewsId);
 }
