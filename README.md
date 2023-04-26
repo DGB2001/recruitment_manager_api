@@ -1,21 +1,17 @@
 # recruitment-manager-api
 ## Enviroment
-### Build docker
-- `docker-compose build`
-### Run docker
-- `docker-compose up`
-### ssh to docker instance
-- `docker exec -it recruitment-manager-php bash`
 ### Install laravel's packages
 - `composer install`
-### DB migration
+### Migrate database
 - `php artisan migrate`
 ### Generate fake data
 - `php artisan db:seed`
+### Run server
+- `php artisan serve`
 ### Base URL
-- http://localhost:8010/api/v1
+- http://localhost:8000/api/v1
 ### Run application
-- http://localhost:8010
+- http://localhost:8000
 ### Doc API
 - http://localhost:8010/api/v1/documentation
 ### Debug query for perfomance
