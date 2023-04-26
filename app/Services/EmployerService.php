@@ -32,4 +32,16 @@ class EmployerService implements EmployerServiceInterface
         }
         return [Response::HTTP_CREATED, ['status' => Response::HTTP_CREATED]];
     }
+
+    /**
+     * getEmployerDetail
+     *
+     * @param int $employerId
+     * @return array
+     */
+    public function getEmployerDetail(int $employerId)
+    {
+        $candidate = Employer::with(['user'])->findOrFail($employerId);
+        return [Response::HTTP_OK, $candidate];
+    }
 }

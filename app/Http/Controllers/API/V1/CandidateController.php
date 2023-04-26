@@ -32,4 +32,17 @@ class CandidateController extends BaseController
 
         return $this->response($data, $statusCode);
     }
+
+    /**
+     * getCandidateDetail
+     *
+     * @param int $candidateId
+     * @return json
+     */
+    public function getCandidateDetail(int $candidateId)
+    {
+        list($statusCode, $data) = $this->candidateService->getCandidateDetail($candidateId);
+
+        return $this->response($data, $statusCode);
+    }
 }

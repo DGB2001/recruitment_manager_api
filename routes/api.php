@@ -44,8 +44,10 @@ Route::controller(ApplicationController::class)->group(function () {
 
 Route::controller(CandidateController::class)->group(function () {
     Route::post('/candidates', 'createCandidate')->name('create-candidate');
+    Route::get('/candidates/{id}', 'getCandidateDetail')->name('get-candidate-detail');
 });
 
 Route::controller(EmployerController::class)->group(function () {
     Route::post('/employers', 'createEmployer')->name('create-employer');
+    Route::get('/employers/{id}', 'getEmployerDetail')->name('get-employer-detail');
 });

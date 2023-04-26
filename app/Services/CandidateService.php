@@ -32,4 +32,16 @@ class CandidateService implements CandidateServiceInterface
         }
         return [Response::HTTP_CREATED, ['status' => Response::HTTP_CREATED]];
     }
+
+    /**
+     * getCandidateDetail
+     *
+     * @param int $candidateId
+     * @return array
+     */
+    public function getCandidateDetail(int $candidateId)
+    {
+        $candidate = Candidate::with(['user'])->findOrFail($candidateId);
+        return [Response::HTTP_OK, $candidate];
+    }
 }

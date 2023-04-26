@@ -32,4 +32,17 @@ class EmployerController extends BaseController
 
         return $this->response($data, $statusCode);
     }
+
+    /**
+     * getEmployerDetail
+     *
+     * @param int $employerId
+     * @return json
+     */
+    public function getEmployerDetail(int $employerId)
+    {
+        list($statusCode, $data) = $this->employerService->getEmployerDetail($employerId);
+
+        return $this->response($data, $statusCode);
+    }
 }
