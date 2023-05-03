@@ -78,8 +78,18 @@ class EmployerService implements EmployerServiceInterface
      */
     public function getEmployerList(array $params)
     {
-        $employer = Employer::get();
-        return [Response::HTTP_OK, $employer];
+        $queryGetEmployerList = Employer::orderBy('company_name', 'asc');
+
+        if (isset($params['company_name'])) {
+            $queryGetEmployerList = $queryGetEmployerList->where('company_name', 'like', '%' . $params['company_name'] . '%');
+        }
+
+        if (isset($params['address'])) {
+            $queryGetEmployerList = $queryGetEmployerList->where('address', 'like', '%' . $params['address'] . '%');
+        }
+
+        $employerList = $queryGetEmployerList->get();
+        return [Response::HTTP_OK, $employerList];
     }
 
     /**
