@@ -20,11 +20,36 @@ class RecruitmentNewsService implements RecruitmentNewsServiceInterface
      */
     public function getListRecruitmentNews(array $params)
     {
-        $recruitmentNewsList = RecruitmentNews::with([
+        $queryGetRecruitmentNewsList = RecruitmentNews::with([
             'employer',
             'masterTechnical',
             'masterLevel',
-        ])->orderByDesc('created_at')->get();
+        ]);
+
+        if(isset($params['employer_id'])) {
+            $queryGetRecruitmentNewsList = $queryGetRecruitmentNewsList->where('employer_id', $params['employer_id']);
+        }
+
+        if(isset($params['master_technical_id'])) {
+            $queryGetRecruitmentNewsList = $queryGetRecruitmentNewsList->where('master_technical_id', $params['master_technical_id']);
+        }
+
+        if(isset($params['master_level_id'])) {
+            $queryGetRecruitmentNewsList = $queryGetRecruitmentNewsList->where('master_level_id', $params['master_level_id']);
+        }
+
+        if(isset($params['title'])) {
+            $queryGetRecruitmentNewsList = $queryGetRecruitmentNewsList->where('title', 'like', '%' . $params['title'] . '%');
+        }
+
+        if ($params['order_by'] == 'desc') {
+            $recruitmentNewsList = $queryGetRecruitmentNewsList->orderByDesc('created_at')->get();
+        }
+
+        if ($params['order_by'] == 'asc') {
+            $recruitmentNewsList = $queryGetRecruitmentNewsList->orderBy('created_at', 'asc')->get();
+        }
+
         return [Response::HTTP_OK, $recruitmentNewsList->map(function ($recruitmentNews) {
             return [
                 'id' => $recruitmentNews->id,
