@@ -79,7 +79,7 @@ class CandidateService implements CandidateServiceInterface
      */
     public function getCandidateApplicationList(int $candidateId)
     {
-        $application = Application::with(['masterTechnical', 'masterLevel'])
+        $application = Application::with(['masterTechnical', 'masterLevel', 'recruitmentNews.employer'])
             ->where('candidate_id', $candidateId)->orderByDesc('created_at')->get();
 
         return [Response::HTTP_OK, $application];
