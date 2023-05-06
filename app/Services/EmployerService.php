@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Application;
 use App\Models\Employer;
 use App\Models\RecruitmentNews;
 use Illuminate\Support\Facades\DB;
@@ -104,7 +105,9 @@ class EmployerService implements EmployerServiceInterface
         $employer = Employer::where('id', $employerId)->firstOrFail();
         $employer->delete();
         $employer->user->delete();
-        RecruitmentNews::where('employer_id', $employerId)->delete();
+        $recruitmentNewsId = RecruitmentNews::where('employer_id', $employerId)->pluck('id')->toArray();
+        Application::whereIn('recruitment_news_id', $recruitmentNewsId)->delete();
+        RecruitmentNews::destroy($recruitmentNewsId);
 
         return [Response::HTTP_OK, ['status' => Response::HTTP_NO_CONTENT]];
     }
