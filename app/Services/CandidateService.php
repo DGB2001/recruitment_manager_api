@@ -94,6 +94,7 @@ class CandidateService implements CandidateServiceInterface
     public function deleteCandidate(int $candidateId)
     {
         $candidate = Candidate::findOrFail($candidateId);
+        Application::where('candidate_id', $candidateId)->delete();
         $candidate->delete();
         $candidate->user->delete();
 

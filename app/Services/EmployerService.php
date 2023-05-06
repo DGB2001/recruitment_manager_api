@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Employer;
+use App\Models\RecruitmentNews;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
@@ -103,6 +104,7 @@ class EmployerService implements EmployerServiceInterface
         $employer = Employer::where('id', $employerId)->firstOrFail();
         $employer->delete();
         $employer->user->delete();
+        RecruitmentNews::where('employer_id', $employerId)->delete();
 
         return [Response::HTTP_OK, ['status' => Response::HTTP_NO_CONTENT]];
     }

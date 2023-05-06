@@ -6,6 +6,8 @@
 - `php artisan migrate`
 ### Generate fake data
 - `php artisan db:seed`
+### Reset database
+- `php artisan migrate:fresh --seed`
 ### Run server
 - `php artisan serve --host={your IPV4} --port=8000`
 ### Base URL
